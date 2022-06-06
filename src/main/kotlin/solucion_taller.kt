@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat
+import java.util.*
+
 fun main() {
     println(" Hola mundo")
 }
@@ -306,6 +309,73 @@ fun aguaPotableContaminada(psn: Int): Int {
     val bateriasAnio = bateriasXSemestre * 2
     val lac = bateriasAnio * 175
     return lac
+}
+
+/* e. Una empresa que contrata personal requiere determinar la edad de las personas que solicitan trabajo,
+pero cuando se les realiza la entrevista sólo se les pregunta el año en que nacieron. Realice el algoritmo
+para solucionar este problema
+
+Entradas:
+- Año_nacimiento: double - an
+
+Salidas:
+- Edad: double - e
+ */
+
+fun asdsadasdas(){
+println("Por favor registre su fecha de nacimiento")
+var fechanacString= readLine()
+var fechanacDate: Date = SimpleDateFormat(pattern"yyyy").parse(fechanacString)
+var fechaactual=Date(System.currentTimeMillis())
+var edad=fechaactual-fechanacDate
+
+return edad
+}
+/*h. Se requiere determinar el tiempo que tarda una persona en llegar de una ciudad a otra en bicicleta,
+considerando que lleva una velocidad constante. Realice una función para tal fin.
+
+Entradas:
+- distancia --> double --> d
+- velocidad --> double --> v
+Salidas:
+- tiempo --> double --> t
+*/
+
+fun tiempopersona(d:Double, v:Double):Double{
+    Val tmp =(d/v)
+    return tmp
+}
+
+/* m. Escriba una función que halle el volumen de un cono
+
+Entradas:
+- área de la base
+- altura
+
+Salidas:
+-volumen
+ */
+
+fun volumencono=(ab:Double, h:Double): Double{
+    volumen = (ab*h)/3
+    return volumen
+}
+
+/* n. En la universidad vamos a conectar los diversos computadores que hay en una sala de cómputo con cables. Se
+necesita un cable para conectar dos computadores, y debe haber conexión entre todos los computadores.
+Escriba una función que determine el número de cables a comprar a partir del número de computadores que
+hay en la sala.
+
+Entradas:
+# computadores --> double nc
+
+Salidas:
+totalcbles --> double --> tc
+ */
+
+fun conexionpc(nc: Double)Double>{
+    val tc=nc/2
+    return tc
 }
 
 
