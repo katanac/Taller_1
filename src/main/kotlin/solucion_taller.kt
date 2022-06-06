@@ -24,6 +24,9 @@ var s = ((x != y) && (x <= y))
 6.
 var s =((a>=b(c))||(b<=c))
 
+*/
+
+/*
 Actividad 2
 
 a. 30+8*3/6-4%6
@@ -58,7 +61,7 @@ c. 8/4/2*6
 
 * */
 
-
+//region Ejercicio A
 /*
 a. Realice una función que halle el área de un triángulo.
 Entradas:
@@ -70,14 +73,15 @@ Salidas:
 
 Area -> double->ar
 * */
-
 fun calculoAreaTrianglo(b: Double, a: Double): Double {
     val ar = (b * a) / 2
     return ar
 }
+//endregion
 
-
+//region Ejercicio B
 /*
+
 b. Si alquilar una bicicleta tiene cierto valor y puede transportar dos personas, determine cuántas bicicletas
 necesito y cuánto dinero voy a gastar en alquilarlas, para transportar a todos los estudiantes de la
 universidad.
@@ -94,14 +98,33 @@ total dinero del alquiler -> double -> da
 
 * */
 
-fun alquilerBiciletas(ce: Double, va: Double): Pair<Double, Double> {
+fun alquilerBiciletas(ce: Int, va: Double): Pair<Int, Double> {
     val bn = ce / 2
     val da = bn * va
     return Pair(bn, da)
 
 }
+//endregion
 
+//region Ejercicio C
+/*
+c. Según el DANE, el número de desempleados corresponde al 8.15% de la población activa. Escriba una
+función que permita determinar cuántas personas desempleadas hay actualmente en Colombia.
 
+Entradas:
+cantidad personas colombia-> double -> cpc
+
+Salidas:
+personas desempleadas -> double -> pd
+* */
+
+fun calculoDesempleados(cpc: Double): Double {
+    val pd = cpc * 0.0815
+    return pd
+}
+//endregion
+
+//region Ejercicio D
 /*
 d. Se desea determinar cuántos dólares se puede adquirir con cierta cantidad de pesos colombianos
 
@@ -118,7 +141,32 @@ fun conversion(pc: Double, da: Double): Double {
     val d = pc / da
     return d
 }
+//endregion
 
+//region Ejercicio E
+/* e. Una empresa que contrata personal requiere determinar la edad de las personas que solicitan trabajo,
+pero cuando se les realiza la entrevista sólo se les pregunta el año en que nacieron. Realice el algoritmo
+para solucionar este problema
+
+Entradas:
+- Año_nacimiento: double - an
+
+Salidas:
+- Edad: double - e
+ */
+
+fun calculoFecha(an: Int): Int {
+
+    val fechaActual = System.currentTimeMillis()
+    val calendario = Calendar.getInstance()
+    calendario.setTimeInMillis(fechaActual)
+
+    val anioActual = calendario.get(Calendar.YEAR)
+    return anioActual - an
+}
+//endregion
+
+//region Ejercicio F
 /*
 f. Un estacionamiento requiere determinar el cobro que debe aplicar a las personas que lo utilizan. Considere
 que el cobro es con base en las horas que lo disponen y que las fracciones de hora se toman como completas
@@ -138,8 +186,9 @@ fun calculoCobroEstacionamiento(che: Double, ch: Double): Double {
     val cf = horasRedondeadas * ch
     return cf
 }
+//endregion
 
-
+//region Ejercicio G
 /*
 g. Pinturas “La brocha gorda” requiere determinar cuánto cobrar por trabajos de pintura. Considere que se
 cobra por m2 y realice una funciòn que le permita saber cuánto cobrar a un cliente.
@@ -157,7 +206,26 @@ fun calculoCobroTrabajoPintura(cm2: Double, cxm2: Double): Double {
     val cf = cm2 * cxm2
     return cf
 }
+//endregion
 
+//region Ejercicio H
+/*h. Se requiere determinar el tiempo que tarda una persona en llegar de una ciudad a otra en bicicleta,
+considerando que lleva una velocidad constante. Realice una función para tal fin.
+
+Entradas:
+- distancia --> double --> d
+- velocidad --> double --> v
+Salidas:
+- tiempo --> double --> t
+*/
+
+fun tiempopersona(d: Double, v: Double): Double {
+    val tmp = (d / v)
+    return tmp
+}
+//endregion
+
+//region Ejercicio I
 /*
 i. Realice un algoritmo para determinar cuánto pagará finalmente una persona por un artículo equis,
 considerando que tiene un descuento de 5%, y debe pagar 19% de IVA (debe retornar el precio con descuento y
@@ -168,18 +236,20 @@ Entradas:
 precioNetoArticulo -> double -> pna
 
 Salidas:
-descuento -> double -> d
+descuento -> double -> des
 precioFinal -> double -> pf
 * */
 
-fun precioArticulo(pna: Double): Double {
+fun precioArticulo(pna: Double): Pair<Double, Double> {
     val des = pna * 0.05
     val d = pna - des
-    val pf = d * 0.19
-    return pf
+    val iva = d * 0.19
+    val pf = d + iva
+    return Pair(des, pf)
 }
+//endregion
 
-
+//region Ejercicio J
 /*
 j. Realice una función para determinar la nota final que obtendrá un alumno considerando que realiza tres
 exámenes, de los cuales el primero y el segundo tienen una ponderación de 25%, mientras que el tercero de
@@ -203,8 +273,52 @@ fun calculoNotaFinal(n1: Double, n2: Double, n3: Double): Double {
     val nf = valorExamenUno + valorExamenDos + valorExamenTres
     return nf
 }
+//endregion
+
+//region Ejercicio K
+/*
+k. Se tiene el nombre y la edad de tres personas. Se desea saber el nombre y la edad de la persona de menor
+edad.
+
+Entradas:
+persona uno -> double -> p1
+persona dos -> double -> p2
+persona tres -> double -> p3
+
+Salidas:
+
+persona menor -> double -> pm
+
+* */
+
+class Persona {
+    var nombre: String
+    var edad: Int
+
+    constructor(nombre: String, edad: Int) {
+        this.nombre = nombre
+        this.edad = edad
+    }
+}
 
 
+fun calculoPersonaMenor(p1: Persona, p2: Persona, p3: Persona): Pair<String, Int> {
+
+    val listadoPersonas: List<Persona> = listOf(p1, p2, p3)
+
+    val menorEntreP1P2 = Math.min(p1.edad, p2.edad)
+    val menor = Math.min(menorEntreP1P2, p3.edad)
+
+    listadoPersonas.forEach {
+        if (it.edad == menor) {
+            return Pair(it.nombre, it.edad)
+        }
+    }
+    return Pair("persona no existe", 0)
+}
+//endregion
+
+//region Ejercicio L
 /*
 l. El presidente de la república ha decidido estimular a todos los estudiantes de una universidad mediante la
 asignación de becas mensuales, para esto se tomarán en consideración los siguientes criterios:
@@ -248,104 +362,9 @@ fun valorBecaMenorEdad(pe: Double): Double {
     else if (pe < 80 && pe >= 60) return 100.00
     return 0.0
 }
+//endregion
 
-/*
-k. Se tiene el nombre y la edad de tres personas. Se desea saber el nombre y la edad de la persona de menor
-edad.
-
-Entradas:
-persona uno -> double -> p1
-persona dos -> double -> p2
-persona tres -> double -> p3
-
-Salidas:
-
-persona menor -> double -> pm
-
-* */
-
-class Persona {
-    var nombre: String
-    var edad: Int
-
-    constructor(nombre: String, edad: Int) {
-        this.nombre = nombre
-        this.edad = edad
-    }
-}
-
-
-fun calculoPersonaMenor(p1: Persona, p2: Persona, p3: Persona): Pair<String, Int> {
-
-    val listadoPersonas: List<Persona> = listOf(p1, p2, p3)
-
-    val menorEntreP1P2 = Math.min(p1.edad, p2.edad)
-    val menor = Math.min(menorEntreP1P2, p3.edad)
-
-    listadoPersonas.forEach {
-        if (it.edad == menor) {
-            return Pair(it.nombre, it.edad)
-        }
-    }
-    return Pair("persona no existe", 0)
-}
-
-
-/*
-o. Se sabe que una batería de celular contamina 175 litros de agua. ¿Cuántos litros de agua serán contaminados
-por la población de una ciudad en un año si cada persona utiliza 2 baterías al semestre?
-
-Entradas:
-cantidad personas en la ciudad -> int -> psn
-
-Salidas:
-
-litros de agua contaminados -> int -> lac
-
-* */
-
-fun aguaPotableContaminada(psn: Int): Int {
-    val bateriasXSemestre = psn * 2
-    val bateriasAnio = bateriasXSemestre * 2
-    val lac = bateriasAnio * 175
-    return lac
-}
-
-/* e. Una empresa que contrata personal requiere determinar la edad de las personas que solicitan trabajo,
-pero cuando se les realiza la entrevista sólo se les pregunta el año en que nacieron. Realice el algoritmo
-para solucionar este problema
-
-Entradas:
-- Año_nacimiento: double - an
-
-Salidas:
-- Edad: double - e
- */
-
-fun asdsadasdas(){
-println("Por favor registre su fecha de nacimiento")
-var fechanacString= readLine()
-var fechanacDate: Date = SimpleDateFormat(pattern"yyyy").parse(fechanacString)
-var fechaactual=Date(System.currentTimeMillis())
-var edad=fechaactual-fechanacDate
-
-return edad
-}
-/*h. Se requiere determinar el tiempo que tarda una persona en llegar de una ciudad a otra en bicicleta,
-considerando que lleva una velocidad constante. Realice una función para tal fin.
-
-Entradas:
-- distancia --> double --> d
-- velocidad --> double --> v
-Salidas:
-- tiempo --> double --> t
-*/
-
-fun tiempopersona(d:Double, v:Double):Double{
-    Val tmp =(d/v)
-    return tmp
-}
-
+//region Ejercicio M
 /* m. Escriba una función que halle el volumen de un cono
 
 Entradas:
@@ -356,11 +375,13 @@ Salidas:
 -volumen
  */
 
-fun volumencono=(ab:Double, h:Double): Double{
-    volumen = (ab*h)/3
+fun volumencono(ab: Double, h: Double): Double {
+    val volumen = (ab * h) / 3
     return volumen
 }
+//endregion
 
+//region Ejercicio N
 /* n. En la universidad vamos a conectar los diversos computadores que hay en una sala de cómputo con cables. Se
 necesita un cable para conectar dos computadores, y debe haber conexión entre todos los computadores.
 Escriba una función que determine el número de cables a comprar a partir del número de computadores que
@@ -373,12 +394,34 @@ Salidas:
 totalcbles --> double --> tc
  */
 
-fun conexionpc(nc: Double)Double>{
-    val tc=nc/2
+fun conexionpc(nc: Double): Double {
+    val tc = nc / 2
     return tc
 }
+//endregion
 
+//region Ejercicio O
+/*
+o. Se sabe que una batería de celular contamina 175 litros de agua. ¿Cuántos litros de agua serán contaminados
+por la población de una ciudad en un año si cada persona utiliza 2 baterías al semestre?
 
+Entradas:
+cantidad personas en la ciudad -> int -> psn
+
+Salidas:
+
+litros de agua contaminados -> int -> lac
+
+* */
+fun aguaPotableContaminada(psn: Int): Int {
+    val bateriasXSemestre = psn * 2
+    val bateriasAnio = bateriasXSemestre * 2
+    val lac = bateriasAnio * 175
+    return lac
+}
+//endregion
+
+//region Ejercicio P
 /*
 p. Mi proveedor de Internet me asegura que mi conexión es de 4 megabytes por segundo. Escriba una función
 que permita determinar cuántos minutos y segundos debo esperar para descargar la última película de La
@@ -401,10 +444,11 @@ fun calculoDescargaPelicula(ppg: Double): Double {
     val te = ((ppg * unGbAMb) / 4) / 60
     return te
 }
+//endregion
 
-
+//region Ejercicio Q
 /*
-El valor presente de un cierto capital de dinero a una tasa de interés de durante años se encuentra a partir
+q.El valor presente de un cierto capital de dinero a una tasa de interés de durante años se encuentra a partir
 de la fórmula:
 
 VP= c/Math.pow(1+t,n)
@@ -427,5 +471,6 @@ fun calculoValoPresente(c: Double, t: Double, n: Double): Double {
     val vp = c / (Math.pow(1 + t, n))
     return vp
 }
+//endregion
 
 
